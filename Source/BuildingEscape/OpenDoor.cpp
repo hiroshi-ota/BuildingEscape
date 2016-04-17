@@ -21,20 +21,42 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AActor* Owner = GetOwner();
-	FRotator NewRotation = FRotator(0.0f, 60.0f, 0.0f);
-	Owner->SetActorRotation(NewRotation);
+	whichActorOpenes = GetWorld()->GetFirstPlayerController()->GetPawn();
+	Owner = GetOwner();
 
 	// find the owning object
 	
 }
 
+void UOpenDoor::OpenDoor() {
+
+	FRotator NewRotation = FRotator(0.0f, OpenAngle, 0.0f);
+	Owner->SetActorRotation(NewRotation);
+
+}
+
+void UOpenDoor::CloseDoor() {
+
+	FRotator NewRotation = FRotator(0.0f, 0.0f, 0.0f);
+	Owner->SetActorRotation(NewRotation);
+
+}
 
 // Called every frame
 void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-	// ...
+	if (PressurePlate->IsOverlappingActor(whichActorOpenes)) { 
+		
+		OpenDoor(); 
+		lastDoorOpenTime = GetWorld()->GetTimeSeconds();
+	}
+	
+	if (GetWorld()->GetTimeSeconds() > lastDoorOpenTime + doorCloseDelay) {
+
+		CloseDoor();
+	}
+	
 }
 

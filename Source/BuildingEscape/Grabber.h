@@ -3,19 +3,17 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "OpenDoor.generated.h"
+#include "Grabber.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
+class BUILDINGESCAPE_API UGrabber : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UOpenDoor();
-	void OpenDoor();
-	void CloseDoor();
+	UGrabber();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -25,17 +23,17 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
-	float OpenAngle = 90.0f;
-	
-	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	float Reach = 100.f;
 
-	UPROPERTY(EditAnywhere)
-	float doorCloseDelay = 1.f;
+	void Grab();
+	void Release();
+	void GetPhysicsHandleComponent();
+	void GetInputController();
 
-	float lastDoorOpenTime;
+	// Return hit for first physics body in reach
+	const FHitResult GetFirstPhysicsBodyInReach();
+		
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
-	AActor* whichActorOpenes;
-	AActor* Owner;
+	UInputComponent* InputController = nullptr;
 };

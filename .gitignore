@@ -41,7 +41,7 @@ SourceArt/**/*.png
 SourceArt/**/*.tga
 
 # Content
-Content/*
+Content/StarterContent
 
 # Binary Files
 Binaries/*
