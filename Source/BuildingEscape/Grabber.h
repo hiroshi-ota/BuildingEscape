@@ -29,6 +29,8 @@ private:
 	void Release();
 	void GetPhysicsHandleComponent();
 	void GetInputController();
+	FVector GetActorReachEnd();
+	FVector PlayerViewPortLocation();
 
 	// Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
