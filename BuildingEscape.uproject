@@ -12,5 +12,16 @@
 				"Engine"
 			]
 		}
+	],
+	"TargetPlatforms": [
+		"Android",
+		"TVOS",
+		"HTML5",
+		"IOS",
+		"LinuxNoEditor",
+		"MacNoEditor",
+		"PS4",
+		"WindowsNoEditor",
+		"XboxOne"
 	]
 }
